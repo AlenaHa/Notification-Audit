@@ -18,7 +18,6 @@ public class Notification implements NotificationSender {
 
     }
 
-
     public List<UserTuple> getStudentsEmailList() {
         return studentsEmailList;
     }

@@ -15,8 +15,6 @@ public class MailSender {
         final String email = "notificare.info.uaic@gmail.com";
         final String password = "&*notificareinfo*&";
 
-        String from = "sonoojaiswal1987@gmail.com";
-
         //Get the session object
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -31,18 +29,19 @@ public class MailSender {
                     }
                 });
 
-        //compose the message
         try{
             MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(from));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setFrom(new InternetAddress(email));
+
+            message.addRecipient(
+                    Message.RecipientType.TO,
+                    new InternetAddress(to));
 
             message.setSubject(subject);
             message.setText(text);
 
-            // Send message
             Transport.send(message);
-            System.out.println("message sent successfully....");
+            System.out.println("Message sent successfully....");
         }
         catch (MessagingException e) {
             e.printStackTrace();
