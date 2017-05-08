@@ -27,23 +27,27 @@ public class Notification implements NotificationSender {
     }
 
     /**
-     * @author Silviu Rusu
-     * @date 08.05.2017
      *
-     * Added functionality to sendSms
+     * This method attempts to send a SMS using the {@link  com.company.SmsService} class
+     *
+     * @author   RSilviu
+     * @date    08.05.2017
+     * @param userId    The user id of the recipient
+     * @param userType  The user type of the recipient
+     * @param messageId  References predefined message body
      *
      */
-
     public void sendSms(long userId, UserType userType, String messageId) {
         //  try-catch for handling unpredictable exceptions
         try {
-            SmsService ss = new SmsService();   // 3rd party sms gateway(twilio) setup
+            SmsService smsService = new SmsService();   // 3rd party sms gateway(twilio) setup
             String body = messageType.getMessage(messageId);
             //  using personal phone, fetched from os env vars for privacy
+            //  can be replaced by number from db, after twilio verification
             String to = System.getenv("MY_PHONE_NUMBER");
             //  twilio registered phone number
             String from = "+4915735984871";
-            boolean allFine = ss.createSms(to, from, body);
+            boolean allFine = smsService.createSms(to, from, body);
             if(allFine)
                 System.out.println(userType.toString() + " with id: " + userId + " has received the message: "
                     + body);
