@@ -12,3 +12,5 @@ public class Main {
         Notification.Instance.sendEmail(213, UserType.SECRETARY, MessageType.REQUEST_RECEIVED);
     }
 }
+
+
