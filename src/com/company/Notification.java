@@ -26,9 +26,34 @@ public class Notification implements NotificationSender {
         this.studentsEmailList = studentsEmailList;
     }
 
+    /**
+     * @author Silviu Rusu
+     * @date 08.05.2017
+     *
+     * Added functionality to sendSms
+     *
+     */
+
     public void sendSms(long userId, UserType userType, String messageId) {
-        System.out.println(userType.toString() + " with id: " + userId + " has received the message: "
-                + messageType.getMessage(messageId));
+        //  try-catch for handling unpredictable exceptions
+        try {
+            SmsService ss = new SmsService();   // 3rd party sms gateway(twilio) setup
+            String body = messageType.getMessage(messageId);
+            //  using personal phone, fetched from os env vars for privacy
+            String to = System.getenv("MY_PHONE_NUMBER");
+            //  twilio registered phone number
+            String from = "+4915735984871";
+            boolean allFine = ss.createSms(to, from, body);
+            if(allFine)
+                System.out.println(userType.toString() + " with id: " + userId + " has received the message: "
+                    + body);
+            else
+                System.out.println("Trouble in sendSms("+userId+", "+userType+", "+messageId+")");
+        }
+        catch (Exception e){
+            System.out.println("Failed to deliver SMS");
+            e.printStackTrace();
+        }
     }
 
     public void sendEmail(long userId, UserType userType, String messageId) {
