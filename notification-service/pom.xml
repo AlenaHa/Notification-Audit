@@ -14,6 +14,11 @@
     <artifactId>notification-service</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <dependency.docker-maven-plugin.version>0.4.13</dependency.docker-maven-plugin.version>
+        <docker.image-namespace>group6A</docker.image-namespace>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.notification</groupId>
@@ -34,6 +39,24 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>${dependency.docker-maven-plugin.version}</version>
+                <configuration>
+                    <imageName>${docker.image-namespace}/${project.artifactId}</imageName>
+                    <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
         </plugins>
+
     </build>
 </project>
