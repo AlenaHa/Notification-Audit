@@ -1,11 +1,10 @@
 {
     "messages": {
         "email-subject": "[Notification] Info UAIC Iasi Notification.",
-
-        "receive": "This is a request received message dudeee.",
+        "receive": "Your request have been received..",
         "approved": "Your request has been approved.",
         "denied": "Your request has been denied.",
-        "done": "Your request has been finalised. You can come.",
+        "done": "Your request has been finalised. You may pick-up the document.",
         "sent": "Your request has been sent."
     }
 }
