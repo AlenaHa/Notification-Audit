@@ -11,7 +11,6 @@
 
     <modules>
         <module>notification-impl</module>
-        <module>../notification/notification-service</module>
         <module>notification-service</module>
     </modules>
 
