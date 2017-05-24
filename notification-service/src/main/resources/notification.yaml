@@ -1,0 +1,9 @@
+# HTTP Server
+server:
+  contextPath: /notification # HTTP default context path
+  port: 8777   # Tomcat port
+
+# Spring properties
+spring:
+  application:
+     name: notification # Service name
